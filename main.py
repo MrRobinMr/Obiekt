@@ -2,6 +2,7 @@ import pygame as pg, sys
 from rocket import Rocket
 from point import Point
 from enemy import Enemy
+from save import Save
 
 class Game(object):
     def __init__(self):
@@ -17,6 +18,7 @@ class Game(object):
         self.player = Rocket(self)
         self.point = Point(self)
         self.enemy = Enemy(self)
+        self.save = Save()
 
         while True:
             #events
@@ -55,6 +57,9 @@ class Game(object):
         self.enemy.draw()
 
     def over(self, score):
+        #score
+        self.save.checkScore(score)
+        #display
         pg.display.set_caption("Game Over")
         self.screen.fill((20, 100, 0))
         txt = pg.font.Font(pg.font.get_default_font(), 30)
